@@ -1,7 +1,7 @@
 FROM dockette/debian:bullseye-slim
 
 # TENGINE/NGINX
-ENV TENGINE_VERSION 3.1.0
+ENV TENGINE_VERSION=3.1.0
 
 ENV PHP_MODS_DIR=/etc/php/7.4/mods-available
 ENV PHP_FPM_DIR=/etc/php/7.4/fpm
@@ -12,7 +12,7 @@ ENV PHP_FPM_CONF=${PHP_FPM_DIR}/php-fpm.conf
 
 ENV TZ=Europe/Prague
 
-ENV CONFIG "\
+ENV CONFIG="\
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
     --modules-path=/usr/lib/nginx/modules \
