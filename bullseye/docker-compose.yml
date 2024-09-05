@@ -1,0 +1,39 @@
+networks:
+  mynet:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+services:
+    lnp: # linux+nginx+php 测试环境镜像
+        # 如果镜像存在于 docker hub 上就会拉取（当拉取成功时，就会使用此镜像创建容器），不管上下文有没有 build 项
+        # 如果 docker hub 上没有此镜像(或者有，但因为权限问题未能下载)，且上下文中有 build 项，会作为即将被创建的镜像名称
+        image: lnp:1.0
+        build:
+          # 表示与本文件同目录
+          context: .
+          # 创建镜像的文本名称
+          dockerfile: Dockerfile
+        hostname: lnpTestHost
+        # 映射端口 【宿主机端口:容器端口】
+        ports:
+            - "80:80"
+            - "443:443"
+        # 目录挂载 【宿主机目录:容器目录】
+        volumes:
+            - /root/website/bullseye/www:/srv/www/
+        # 容器名称
+        container_name: lnpTest
+        #environment:
+        #    - "SERSYNC=true"
+        restart: always
+        # 相当于 docker run -i
+        stdin_open: true
+        # 相当于 docker run -t
+        tty: true
+        # 指定容器的ip
+        #networks:
+        #    mynet:
+        #        ipv4_address: 172.20.0.2
+        # 容器的ip在设置的网络名的网段中随机生成
+        networks:
+            - mynet
