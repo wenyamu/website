@@ -25,3 +25,6 @@ RUN apt install -y --no-install-recommends \
   ......
 ......
 ```
+
+## bullseye 使用的是 tengine 并且安装了扩展
+## buster 使用的是原版 nginx 并未安装扩展
