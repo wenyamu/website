@@ -20,9 +20,7 @@ RUN apt install -y --no-install-recommends \
 FROM dockette/debian:bullseye
 ......
 RUN apt install -y --no-install-recommends \
-  #php7.4-apc \
   php7.4-apcu \
-  #php7.4-mongo \
   php7.4-mongodb \
   ......
 ......
