@@ -4,7 +4,7 @@ docker build -t diy:1 .
 ```
 
 ## edit from https://github.com/dockette
-
+## 注意 buster 与 bullseye 在编译 php 时的区别
 > for buster
 ```
 FROM dockette/debian:buster
