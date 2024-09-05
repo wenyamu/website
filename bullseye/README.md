@@ -3,27 +3,7 @@
 docker build -t diy:1 .
 ```
 
-## edit from https://github.com/dockette
-
-> for buster
+## 一键创建镜像并生成容器
 ```
-FROM dockette/debian:buster
-......
-RUN apt install -y --no-install-recommends \
-  php7.4-apc \
-  php7.4-mongo \
-  ......
-......
-```
-> for bullseye
-```
-FROM dockette/debian:bullseye
-......
-RUN apt install -y --no-install-recommends \
-  #php7.4-apc \
-  php7.4-apcu \
-  #php7.4-mongo \
-  php7.4-mongodb \
-  ......
-......
+docker compose -f docker-compose.yml up -d
 ```
