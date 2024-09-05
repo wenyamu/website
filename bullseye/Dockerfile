@@ -58,8 +58,9 @@ ENV CONFIG="\
     --with-stream_geoip_module=dynamic \
     --add-module=modules/ngx_http_upstream_check_module \
     --add-module=modules/ngx_http_concat_module \
-    --add-module=modules/dynamic-upstream-module-src-0.1.6 \
     --add-module=modules/ngx_http_upstream_session_sticky_module \
+    --add-module=modules/dynamic-upstream-module-src-0.1.6 \
+    --add-module=modules/nginx-rtmp-module-1.2.2 \
     "
 
 RUN usermod -u 82 www-data \
@@ -83,9 +84,12 @@ RUN usermod -u 82 www-data \
     && tar -zxC /usr/src -f tengine.tar.gz \
     && rm tengine.tar.gz \
     && cd /usr/src/tengine-$TENGINE_VERSION \
-    && curl -L "https://github.com/nginx-with-docker/dynamic-upstream-module-src/archive/refs/tags/v0.1.6.tar.gz" -o more.tar.gz \
-    && tar -zxC /usr/src/tengine-$TENGINE_VERSION/modules -f more.tar.gz \
-    && rm more.tar.gz \
+    && curl -L "https://github.com/nginx-with-docker/dynamic-upstream-module-src/archive/v0.1.6.tar.gz" -o dynamic-upstream-module.tar.gz \
+    && curl -L "https://github.com/arut/nginx-rtmp-module/archive/v1.2.2.tar.gz" -o nginx-rtmp-module.tar.gz \
+    && tar -zxC /usr/src/tengine-$TENGINE_VERSION/modules -f dynamic-upstream-module.tar.gz \
+    && tar -zxC /usr/src/tengine-$TENGINE_VERSION/modules -f nginx-rtmp-module.tar.gz \
+    && rm dynamic-upstream-module.tar.gz \
+    && rm nginx-rtmp-module.tar.gz \
     && ./configure $CONFIG \
     && make -j$(getconf _NPROCESSORS_ONLN) \
     && make install \
